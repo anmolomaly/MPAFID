@@ -1,0 +1,11 @@
+sentence1,sentence2,label
+"Improvement and widening of rural roads in Shimla","Construction and strengthening of rural road network in Shimla villages",1
+"Construction of a new road connecting remote villages","Development of rural road connectivity for remote villages",1
+"Installation of water supply pipelines and storage tanks","Development of drinking water infrastructure including pipelines and tanks",1
+"Construction of classrooms in government schools","Renovation and expansion of government school buildings and classrooms",1
+"Construction of a rural primary health centre","Development of healthcare centre and medical infrastructure for villages",1
+"Road improvement in Shimla","Installation of drinking water pipelines in Rampur",0
+"Government school building upgrade","Construction of rural health centre",0
+"Drinking water supply scheme","Road construction project",0
+"Healthcare infrastructure development","School classroom construction",0
+"Road strengthening project","Water storage tank installation",0

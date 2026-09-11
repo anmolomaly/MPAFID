@@ -1,0 +1,11 @@
+id,title,description,latitude,longitude,constituency,category,cost,status
+1,Shimla Rural Road Improvement,Improvement and widening of rural road connecting villages in Shimla district,31.1048,77.1734,Shimla Rural,Road,4500000,Active
+2,Shimla Rural Road Development,Construction and strengthening of rural road network connecting nearby villages,31.1060,77.1750,Shimla Rural,Road,4700000,Active
+3,Theog Road Construction,Construction of new road connecting remote villages in Theog constituency,31.1230,77.3500,Theog,Road,5200000,Active
+4,Theog Rural Road Improvement,Upgradation and strengthening of existing village roads in Theog area,31.1245,77.3520,Theog,Road,5000000,Historical
+5,Rampur Drinking Water Project,Installation of water supply pipelines and storage tanks for rural communities,31.4490,77.6300,Rampur,Water Supply,3800000,Active
+6,Rampur Water Supply Scheme,Development of drinking water infrastructure including pipelines and tanks,31.4510,77.6320,Rampur,Water Supply,4000000,Active
+7,Shimla School Infrastructure,Construction and improvement of classrooms and facilities in government schools,31.1000,77.1700,Shimla Rural,Education,6000000,Active
+8,Shimla School Building Upgrade,Renovation and expansion of government school buildings and classrooms,31.1015,77.1715,Shimla Rural,Education,5800000,Historical
+9,Theog Health Centre,Construction of a rural primary health centre with basic medical facilities,31.1200,77.3450,Theog,Healthcare,7000000,Active
+10,Theog Rural Health Facility,Development of healthcare centre and essential medical infrastructure for villages,31.1210,77.3460,Theog,Healthcare,6800000,Historical
