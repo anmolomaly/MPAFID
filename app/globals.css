@@ -1,0 +1,265 @@
+@import "tailwindcss";
+
+/* =========================================================
+   MPAFID COMMAND DASHBOARD
+   Global Government Portal Theme
+========================================================= */
+
+:root {
+  --background: #f4f6f8;
+  --surface: #ffffff;
+  --surface-elevated: #f8fafc;
+
+  --border: #d9e1e8;
+  --border-subtle: #e5eaf0;
+
+  --text-primary: #172b4d;
+  --text-secondary: #475467;
+  --text-muted: #667085;
+
+  --blue: #315d82;
+  --blue-dark: #174a7c;
+  --blue-bg: #eef4fa;
+
+  --safe: #39704e;
+  --safe-bg: #ecf7f0;
+
+  --medium: #9a6700;
+  --medium-bg: #fff6e5;
+
+  --high: #a33a3a;
+  --high-bg: #fcecec;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text-primary);
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* =========================================================
+   Selection
+========================================================= */
+
+::selection {
+  background: #dce9f4;
+  color: #172b4d;
+}
+
+/* =========================================================
+   Scrollbar
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f3f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c4ced8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #aebbc8;
+}
+
+/* =========================================================
+   Links
+========================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================================================
+   Buttons
+========================================================= */
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #315d82;
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Inputs
+========================================================= */
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* =========================================================
+   Leaflet Map
+========================================================= */
+
+.leaflet-container {
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+  background: #eef1f3;
+}
+
+.leaflet-control-zoom {
+  border: 1px solid #d9e1e8 !important;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.08) !important;
+}
+
+.leaflet-control-zoom a {
+  color: #344054 !important;
+  background: #ffffff !important;
+  border-bottom-color: #e5eaf0 !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #f7f9fb !important;
+  color: #174a7c !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #667085 !important;
+  font-size: 9px !important;
+}
+
+.leaflet-control-attribution a {
+  color: #315d82 !important;
+}
+
+/* =========================================================
+   Leaflet Popup
+========================================================= */
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #ffffff;
+  color: #344054;
+}
+
+.leaflet-popup-content-wrapper {
+  border: 1px solid #d9e1e8;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(16, 24, 40, 0.12);
+}
+
+.leaflet-popup-content {
+  margin: 12px;
+}
+
+.leaflet-popup-close-button {
+  color: #667085 !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: #172b4d !important;
+}
+
+/* =========================================================
+   Recharts
+========================================================= */
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #e5eaf0;
+}
+
+.recharts-text {
+  fill: #667085;
+}
+
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+/* =========================================================
+   Utility Classes
+========================================================= */
+
+.gov-card {
+  background: #ffffff;
+  border: 1px solid #d9e1e8;
+  border-radius: 8px;
+}
+
+.gov-card-muted {
+  background: #f8fafc;
+  border: 1px solid #e1e8ef;
+  border-radius: 6px;
+}
+
+.gov-section-label {
+  color: #667085;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.gov-heading {
+  color: #172b4d;
+  font-weight: 600;
+}
+
+.gov-secondary {
+  color: #667085;
+}
+
+/* =========================================================
+   Reduced Motion
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   Mobile Adjustments
+========================================================= */
+
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+}
