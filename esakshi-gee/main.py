@@ -1,20 +1,28 @@
+import sys
+from pathlib import Path
+
+from celery.result import AsyncResult
 from fastapi import FastAPI, HTTPException
 
-from app.schemas import ESakshiRequest
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-from app.gee_service import (
+from schemas import ESakshiRequest
+
+from gee_service import (
     initialize_gee,
     create_aoi,
-    create_cloud_free_composite
+    create_cloud_free_composite,
 )
+from change_detection import calculate_change_percentage
+from risk_engine import calculate_risk
 
-from app.change_detection import (
-    calculate_change_percentage
-)
+# Deduplication engine (fast tier)
+from semantic.dedup_engine import SemanticDeduplicationEngine
 
-from app.risk_engine import (
-    calculate_risk
-)
+# Celery task queue
+from tasks import run_full_analysis
 
 
 # Create FastAPI application
@@ -53,109 +61,28 @@ def health():
 
 @app.post("/api/v1/esakshi/analyze")
 def analyze_work(request: ESakshiRequest):
-
     try:
-
-        # --------------------------------
-        # 1. Create Area of Interest
-        # --------------------------------
-
-        aoi = create_aoi(
-            request.latitude,
-            request.longitude,
-            request.radius_meters
+        # ------------------------------------------------------------
+        # Tier 1 – Fast deduplication (remains synchronous)
+        # ------------------------------------------------------------
+        dedup_engine = SemanticDeduplicationEngine()
+        duplicate_result = dedup_engine.check_duplicate(
+            proposal_text=request.dict().get("proposal_text", ""),
+            latitude=request.latitude,
+            longitude=request.longitude,
         )
+        if duplicate_result["duplicate_found"]:
+            return {"duplicate": True, "details": duplicate_result}
 
-
-        # --------------------------------
-        # 2. Get BEFORE satellite image
-        # --------------------------------
-
-        before_image = create_cloud_free_composite(
-            aoi,
-            request.before_start,
-            request.before_end
-        )
-
-
-        # --------------------------------
-        # 3. Get AFTER satellite image
-        # --------------------------------
-
-        after_image = create_cloud_free_composite(
-            aoi,
-            request.after_start,
-            request.after_end
-        )
-
-
-        # --------------------------------
-        # 4. Detect physical/geospatial change
-        # --------------------------------
-
-        detected_change = (
-            calculate_change_percentage(
-                before_image,
-                after_image,
-                aoi
-            )
-            .getInfo()
-        )
-
-
-        # --------------------------------
-        # 5. Calculate risk
-        # --------------------------------
-
-        risk = calculate_risk(
-            detected_change,
-            request.reported_progress
-        )
-
-
-        # --------------------------------
-        # 6. Return result
-        # --------------------------------
-
+        # ------------------------------------------------------------
+        # Tier 2 – Queue heavyweight analysis (asynchronous)
+        # ------------------------------------------------------------
+        request_payload = request.dict()
+        task = run_full_analysis.delay(request_payload)
         return {
-
-            "work_id": request.work_id,
-
-            "location": {
-                "latitude": request.latitude,
-                "longitude": request.longitude,
-                "radius_meters": request.radius_meters
-            },
-
-            "satellite_analysis": {
-
-                "detected_change_percent": round(
-                    detected_change,
-                    2
-                ),
-
-                "method": (
-                    "Sentinel-2 NDBI "
-                    "change detection"
-                )
-            },
-
-            "reported_progress": (
-                request.reported_progress
-            ),
-
-            "risk_assessment": risk,
-
-            "human_review_required": (
-                risk["risk_level"]
-                in ["HIGH", "CRITICAL"]
-            )
+            "duplicate": False,
+            "task_id": task.id,
+            "message": "Analysis queued – poll /tasks/{task_id} for results.",
         }
-
-
     except Exception as error:
-
-        raise HTTPException(
-            status_code=500,
-            detail=str(error)
-        )
+        raise HTTPException(status_code=500, detail=str(error))

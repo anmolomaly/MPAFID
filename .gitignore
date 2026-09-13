@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.so
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+.venv*
+
+# Jupyter / notebooks
+.ipynb_checkpoints/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs / temp
+logs/
+*.log
+*.tmp
+*.temp
+cache/
+tmp/
+temp/
+
+# Build / frontend
+.next/
+out/
+build/
+dist/
+node_modules/
+.npm/
+.pnpm-store/
+coverage/
+
+# Python package installs
+pip-wheel-metadata/
+
+# Earth Engine / Google auth
+*.json
+!package.json
+!tsconfig.json
+!next.config.ts
+!eslint.config.mjs
+!postcss.config.mjs
+!tailwind.config.*
+
+# Database / local data
+*.sqlite3
+*.db
+
+# Project-specific large artifacts
+semantic/models/
+semantic/data/*.npy
+semantic/faiss_db/
+semantic/logs/
+
+# Keep source folder structure only
+# Do not ignore the project source files themselves.
