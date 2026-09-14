@@ -51,3 +51,9 @@ class ESakshiRequest(BaseModel):
         ge=20,
         le=1000
     )
+
+    # Added for Semantic Deduplication
+    proposal_text: str = Field(default="")
+
+    # Added for Image Forensics (Member 3)
+    image_urls: Optional[list[str]] = Field(default_factory=list)

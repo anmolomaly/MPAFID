@@ -2,20 +2,9 @@ import ee
 
 
 def initialize_gee():
-    """
-    Initialize Google Earth Engine.
-    """
-
-    try:
-        ee.Initialize(project="esakshi-gee")
-        print("Google Earth Engine initialized successfully.")
-
-    except Exception:
-        print("Earth Engine authentication required.")
-        ee.Authenticate()
-        ee.Initialize(project="esakshi-gee")
-
-        print("Google Earth Engine initialized successfully.")
+    """MOCK Initialize Google Earth Engine."""
+    print("MOCK: Skipping Earth Engine authentication for pipeline testing.")
+    pass
 
 
 def create_aoi(latitude, longitude, radius_meters):

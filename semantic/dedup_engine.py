@@ -1,3 +1,4 @@
+import os
 import math
 import pandas as pd
 import numpy as np
@@ -9,7 +10,10 @@ class SemanticDeduplicationEngine:
 
     def __init__(
         self,
-        data_path="data/projects.csv",
+        data_path=os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            "data/projects.csv"
+        ),
         similarity_threshold=0.75,
         radius_km=5
     ):
