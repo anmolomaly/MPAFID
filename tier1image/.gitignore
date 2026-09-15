@@ -1,0 +1,5 @@
+.venv/
+__pycache__/
+*.pyc
+mpafid_hash_registry.sqlite3
+static/ela/*.jpg
